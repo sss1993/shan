@@ -4,11 +4,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>仿饿了么平台管理</title>
-
-        
-
-
+        <title></title>
 
         <!-- Vendor CSS -->
         <link href="/d/vendors/bower_components/fullcalendar/dist/fullcalendar.min.css" rel="stylesheet">
@@ -27,6 +23,8 @@
             margin-bottom: 20px;
         }
         </style>
+
+        <script src="/d/vendors/bower_components/jquery/dist/jquery.min.js"></script>
         <script src="/layer/layer.js"></script>
     </head>
         
@@ -404,7 +402,6 @@
                         <a href=""><i class="zmdi zmdi-trending-up"></i>审核商户</a>
                         <ul>
                             <li><a href="{{ url('admin/audit') }}">审核列表</a></li>
-                            <li><a href="{{ url('admin/audit/create') }}">添加审核</a></li>
                         </ul>
                     </li>
                     <li class="sub-menu">
@@ -556,7 +553,9 @@
             <script src="/layer/layer.js"></script>
 
 
-            <section id="">
+
+
+            <section id="content">
                 @if (count($errors) > 0)
                     <div class="alert alert-danger" >
                         <ul>
@@ -653,7 +652,7 @@
         
         <!-- Javascript Libraries -->
         
-        <script src="/d/vendors/bower_components/jquery/dist/jquery.min.js"></script>
+
         
         <script src="/d/vendors/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
         

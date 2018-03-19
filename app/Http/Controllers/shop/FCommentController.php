@@ -39,7 +39,7 @@ class FCommentController extends Controller
         }
        // var_dump($f_satis);
         if(empty($f_satis)){
-            $cmt = hf_comment::where('sid',1)->paginate(5);
+            $cmt = hf_comment::where('sid',session('sid'))->paginate(5);
         }
         $count = count($cmt);
         $uarr = [];

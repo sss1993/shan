@@ -11,9 +11,13 @@
 |
 */
 
-Route::resource('/','home\HomeController');
+
+Route::resource('/','home\ShopController');
+
+Route::resource('admin/login','admin\LoginController');
+
 // 后台模块
-Route::group(['prefix' => 'admin'],function(){
+Route::group(['prefix' => 'admin','middleware' =>'adminlogin'],function(){
 	Route::get('/',function(){
 		return view('admin.layout.index');
 	});
@@ -37,21 +41,75 @@ Route::group(['prefix' => 'admin'],function(){
 	Route::resource('complain','admin\ComplainController');
 	// 后台审核模块
 	Route::resource('audit','admin\AuditController');
+	Route::get('achange/{id}','admin\AuditController@tongguo');
 	// 后台广告管理
 	Route::resource('advert','admin\AdvertController');
 });
 
+
+// 前台商铺模块
+Route::resource('home/shoplist','home\ShopController');
+//前台登陆
+Route::resource('home/login','home\LoginController');
+//前台注册
+Route::resource('home/reg','home\RegController');
+// 前台模块
+Route::group(['prefix'=>'home','middleware' => 'homelogin'],function(){
+	//前台个人中心
+	Route::resource('userinfo','home\UserinfoController');
+	Route::resource('addr','home\AddrController');
+	//前台注销
+	Route::get('exit','home\LoginController@exita');
+	//前台订单
+	Route::resource('uorder','home\UorderController');
+	//前台用户信息修改
+	Route::resource('pwd','home\PwdController');
+	//前台注册商户
+	Route::resource('audit','home\AuditController');
+	// 购物车
+	Route::get('car/{id}','home\ShopController@car');
+	// 修改购物车 + 
+	Route::get('increment/{id}/{increment}','home\ShopController@increment');
+	// 修改购物车 -
+	Route::get('decrease/{id}/{decrease}','home\ShopController@decrease');
+	// 删除购物车
+	Route::get('del/{id}','home\ShopController@del');
+	// 显示购物车
+	Route::get('showcar','home\ShopController@showcar');
+	// 个人中心
+	Route::resource('userinfo','home\UserinfoController');
+	// 收藏模块
+	Route::resource('like','home\LikeController');
+	Route::get('addlike/{id}','home\UserinfoController@addlike');
+	// 订单
+	Route::resource('order','home\OrderController');
+	// 评价
+	Route::resource('comment','home\CommentController');
+	// 显示评价模板
+	Route::get('comment/show/{fid}','home\CommentController@cshow');
+	// 添加评论
+	Route::post('comment/addcmt','home\CommentController@addcmt');
+
+});                                                                                   
+
+// 商家登录模块
+Route::get('shop/login','shop\LoginController@index');
+// 商家验证登录
+Route::get('shop/dologin','shop\LoginController@doLogin');
+// 商家选择商铺
+Route::get('shop/login/{id}/shopinfo','shop\LoginController@shopInfo');
 // 商家模块
-Route::group(['prefix'=>'shop'],function(){
-	Route::get('/',function(){
-		return view('shop.layout.index');
-	});
+Route::group(['prefix'=>'shop','middleware' => 'shoplogin'],function(){
+	Route::get('exit','shop\LoginController@exita');
+	// 默认商家首页
+	Route::resource('/','shop\ShopPageController');
+	Route::get('shoppage/{id}/info','shop\ShopPageController@info');
+	Route::get('shoppage/dingdan/{id}','shop\ShopPageController@dingdan');
 	// 商家注册模块
 	Route::resource('reg','shop\regController');
-	// 商家登录模块
-	Route::resource('login','shop\LoginController');
 	// 商家订单模块
 	Route::resource('order','shop\OrderController');
+	Route::get('order/{id}/info','shop\OrderController@info');
 	// 商家店铺模块
 	Route::resource('store','shop\StoreController');
 	// 商家菜品模块
@@ -66,5 +124,5 @@ Route::group(['prefix'=>'shop'],function(){
 	Route::resource('userinfo','shop\UserInfoController');
 });
 
-
+Route::get('kit/captcha/{tmp}', 'home\LoginController@captcha');
 

@@ -88,8 +88,8 @@ class shop extends Model
             // 文件存放路径
             $destinationPath = './shop_pic';
             // 删除用户之前上传的商铺首页图片
-            unlink($destinationPath.'/'.$shop_arr->s_page);
-            unlink($destinationPath.'/sm_'.$shop_arr->s_page);
+            // unlink($destinationPath.'/'.$shop_arr->s_page);
+            // unlink($destinationPath.'/sm_'.$shop_arr->s_page);
             $file = $request->file('s_page');
             // 拼接文件名
             $fileName = time().rand(1000,9999).'.'.$file->getClientOriginalExtension();
@@ -107,13 +107,13 @@ class shop extends Model
         if($request->hasFile('s_face')){
             // 文件存放路径
             $destinationPath = './shop_pic';
-            // 删除之前的商铺图片
-            $arr = explode(',', $shop_arr->s_face);
-            array_pop($arr);
-            foreach ($arr as $k => $v) {
-                unlink('./shop_pic/'.$v);
-                unlink('./shop_pic/sm_'.$v);
-            }
+            // // 删除之前的商铺图片
+            // $arr = explode(',', $shop_arr->s_face);
+            // array_pop($arr);
+            // foreach ($arr as $k => $v) {
+            //     unlink('./shop_pic/'.$v);
+            //     unlink('./shop_pic/sm_'.$v);
+            // }
             $s_face = $request->file('s_face');
             $s_fileName = '';
             for($i=0;$i<=count($s_face)-1;$i++){
@@ -149,20 +149,20 @@ class shop extends Model
         $res = self::where('id',$id)->first();
 
         // 删除商铺其他图片
-        $flag = '';
-        if(!empty($res->s_face)){
-            $arr = explode(',', $res->s_face);
-            array_pop($arr);
-            foreach ($arr as $k => $v) {
-                $flag .= unlink('./shop_pic/'.$v);
-                $flag .= unlink('./shop_pic/sm_'.$v);
-            }
-        }
-        // 删除商铺首页图片
-        if(!empty($res->s_page)){
-            $flag .= unlink('./shop_pic/'.$res->s_page);
-            $flag .= unlink('./shop_pic/sm_'.$res->s_page);   
-        }
+        // $flag = '';
+        // if(!empty($res->s_face)){
+        //     $arr = explode(',', $res->s_face);
+        //     array_pop($arr);
+        //     foreach ($arr as $k => $v) {
+        //         $flag .= unlink('./shop_pic/'.$v);
+        //         $flag .= unlink('./shop_pic/sm_'.$v);
+        //     }
+        // }
+        // // 删除商铺首页图片
+        // if(!empty($res->s_page)){
+        //     $flag .= unlink('./shop_pic/'.$res->s_page);
+        //     $flag .= unlink('./shop_pic/sm_'.$res->s_page);   
+        // }
         $row = self::where('id',$id)->delete();
         if($row > 0){
             return true;

@@ -138,6 +138,8 @@ return [
         Illuminate\View\ViewServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         zgldh\QiniuStorage\QiniuFilesystemServiceProvider::class,
+        // 购物车
+        Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -196,9 +198,9 @@ return [
         'URL'       => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View'      => Illuminate\Support\Facades\View::class,
-        'Image'     => Intervention\Image\Facades\Image::class,
-
-
+        'Image' => Intervention\Image\Facades\Image::class,
+       
+        'Cart'    => Gloudemans\Shoppingcart\Facades\Cart::class,
     ],
 
 ];

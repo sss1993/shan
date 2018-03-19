@@ -22,6 +22,7 @@ class hf_comment extends Model
     {
     	return $this->hasOne('App\Http\Model\h_user','id','uid');
     }
+    
     public function h_food()
     {
     	return $this->hasOne('App\Http\Model\h_food','id','fid');

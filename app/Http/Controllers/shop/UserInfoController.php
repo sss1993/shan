@@ -17,7 +17,7 @@ class UserInfoController extends Controller
      */
     public function index()
     {
-        $list = shop::where('id', 1) -> get();
+        $list = shop::where('id', session('sid')) -> get();
         // $st_name = [];      
         // foreach ($list as $k => $v) {
         //     $st_name[$v->id] = as_type::where('id',$v->stid)->value('st_name');
@@ -70,7 +70,7 @@ class UserInfoController extends Controller
      */
     public function edit($id)
     {
-        $list = shop::where('id', 1) -> get();
+        $list = shop::where('id', session('sid')) -> get();
 
     }
 
@@ -90,7 +90,7 @@ class UserInfoController extends Controller
         $file = $request->file('s_face');
         // dd($file);
         if($file==null){
-            $res = shop::where('id', 1)->update($list);
+            $res = shop::where('id', session('sid'))->update($list);
             if($res){
                 return redirect('shop/userinfo')->with('msg', '修改成功！');
             }else{
@@ -115,7 +115,7 @@ class UserInfoController extends Controller
             $arr['s_face']  = $s_face;
         }
 
-        $res = shop::where('id', 1)->update($arr);
+        $res = shop::where('id', session('sid'))->update($arr);
         if($res){
             return redirect('shop/userinfo')->with('msg', '修改成功！');
         }else{

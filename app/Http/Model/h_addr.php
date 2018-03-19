@@ -6,6 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class h_addr extends Model
 {
-    protected $table = 'h_addr';
-    public $timestamps = false;
+
+    //关联管理员表(a_user)
+		protected $table	= 'h_addr';
+		
+		//关闭时间戳
+		public $timestamps	= false;
+
+		protected $fillable = ['uid','rtel','tel','address','default'];
+
+
 }

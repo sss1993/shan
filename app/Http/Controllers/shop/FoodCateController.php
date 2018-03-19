@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Model\hf_type;
 
 class FoodCateController extends Controller
 {
@@ -14,9 +15,22 @@ class FoodCateController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        dd('食品分类');
+        // 搜索菜品名称
+        $tname = empty($request->input('tname'))?'':$request->input('tname');
+
+        // 限定每页显示条数
+        if ($request->has('pagenum')) {
+            $page = $request->pagenum;
+        } else {
+            $page = 5;
+        }
+
+        // 这里要限定商铺id搜索条件
+        $data = hf_type::where('tname','like',"%$tname%")->where('sid',session('sid'))->paginate($page);
+
+        return view('shop.foodcate.index',compact('data','tname','page'));
     }
 
     /**
@@ -26,7 +40,7 @@ class FoodCateController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -37,7 +51,15 @@ class FoodCateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->ftype;
+        $res = hf_type::insert(['tname'=>$data,'sid'=>session('sid')]);
+        
+        if ($res) {
+            return 1;
+        } else {
+            return 2;
+        }
+
     }
 
     /**
@@ -71,7 +93,14 @@ class FoodCateController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $data = $request->ftype;
+        $res = hf_type::where('id',$id)->update(['tname'=>$data]);
+
+        if ($res) {
+            return 1;
+        } else {
+            return 2;
+        }
     }
 
     /**
@@ -82,6 +111,7 @@ class FoodCateController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $res = hf_type::where('id', $id)->delete();
+        return $res;
     }
 }

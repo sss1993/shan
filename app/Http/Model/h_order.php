@@ -16,6 +16,21 @@ class h_order extends Model
 
     public function h_addr()
     {
-        return $this->hasOne('App\Http\model\shop','id','aid');
+        return $this->hasOne('App\Http\model\h_addr','id','aid');
+    }
+
+    public function order_info()
+    {
+        return $this->hasMany('App\Http\model\order_info','oid','id');
+    }
+
+    public function morder_info()
+    {
+        return $this->belongsToMany('App\Http\model\order_info','oid','id');
+    }
+
+    public function h_food()
+    {
+    	return $this->hasOne('App\Http\model\h_food','id','fid');
     }
 }

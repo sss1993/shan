@@ -1,6 +1,6 @@
 @extends('admin.layout.index')
 @section('content')
-
+                 <section id="content">
                 <div class="container">
                     <div class="block-header">
                     <div class="card">

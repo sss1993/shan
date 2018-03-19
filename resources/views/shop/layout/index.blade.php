@@ -5,7 +5,7 @@
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>仿饿了么平台管理</title>
+        <title>好吃点商家端</title>
 
         
 
@@ -28,7 +28,9 @@
             margin-bottom: 20px;
         }
         </style>
+        <script src="/d/vendors/bower_components/jquery/dist/jquery.min.js"></script>
         <script src="/layer/layer.js"></script>
+        <script src="/layer/extend/layer.ext.js"></script>
     </head>
         
     <body>
@@ -45,7 +47,12 @@
                 <li class="logo hidden-xs">
                     <a href="index.html">商家平台</a>
                 </li>
-
+                <li id="toggle-width" style="margin-left: 120px;">
+                            <div class="toggle-switch">
+                                <input id="tw-switch" type="checkbox" hidden="hidden">
+                                <label for="tw-switch" class="ts-helper"></label>
+                            </div>
+                        </li> 
                 <!-- <li class="pull-right">
                     <ul class="top-menu">
                         <li id="toggle-width">
@@ -321,7 +328,7 @@
                 <div class="profile-menu">
                     <a href="">
                         <div class="profile-pic">
-                            <img src="/d/img/profile-pics/1.jpg" alt="">
+                            <img src="{{ $uface or '/user_pic/default.jpg' }}" alt="">
                         </div>
 
                         <div class="profile-info">
@@ -336,14 +343,14 @@
                             <a href="{{ url('shop/userinfo') }}"><i class="zmdi zmdi-account"></i>我的资料</a>
                         </li>
                         <li>
-                            <a href=""><i class="zmdi zmdi-time-restore"></i>退出</a>
+                            <a href="{{ url('shop/exit') }}"><i class="zmdi zmdi-time-restore"></i>退出</a>
                         </li>
                     </ul>
                 </div>
 
                 <ul class="main-menu">
                     <li class="active">
-                        <a href="{{ url('shop') }}"><i class="zmdi zmdi-home" style="color:orange"></i>回到首页</a>
+                        <a href="{{ url('shop/') }}"><i class="zmdi zmdi-home" style="color:orange"></i>回到首页</a>
                     </li>
                     <li class="">
                         <a href="{{ url('shop/order') }}"><i class="zmdi zmdi-assignment" style="color:orange"></i>我的订单</a>
@@ -361,13 +368,7 @@
                         <ul>
                             <li><a href="{{ url('shop/food') }}"><i class="zmdi zmdi-menu zmdi-hc-fw"></i>菜品列表</a></li>
                             <li><a href="{{ url('shop/food/create') }}"><i class="zmdi zmdi-plus zmdi-hc-fw"></i>添加菜品</a></li>
-                        </ul>
-                    </li>
-                    <li class="sub-menu">
-                        <a href=""><i class="zmdi zmdi-cocktail zmdi-hc-fw" style="color:orange"></i> 我的分类</a>
-                        <ul>
                             <li><a href="{{ url('shop/foodcate') }}"><i class="zmdi zmdi-menu zmdi-hc-fw"></i>菜品分类</a></li>
-                            <li><a href="{{ url('shop/foodcate/create') }}"><i class="zmdi zmdi-plus zmdi-hc-fw"></i>添加分类</a></li>
                         </ul>
                     </li>
                     <li class="sub-menu">
@@ -484,8 +485,6 @@
                     </a>
                 </div>
             </aside>
-            <script src="/d/vendors/bower_components/jquery/dist/jquery.min.js"></script>
-            <script src="/layer/layer.js"></script>
 
 
             <section id="">
@@ -630,7 +629,8 @@
         <!-- <script src="/d/js/charts.js"></script> -->
         <script src="/d/js/functions.js"></script>
         <script src="/d/js/demo.js"></script>
-
+        <!-- <script src="/d/js/jquery-1.8.3.min.js"></script>
+        <script src="/layer/layer.js"></script> -->
             
         
     </body>

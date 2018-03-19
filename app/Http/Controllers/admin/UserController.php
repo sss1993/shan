@@ -18,9 +18,7 @@ class UserController extends Controller
      */
     public function index(Request $request)
     {
-        // $list = h_user::all();
-        // var_dump($res);
-        // dd($res);
+       
         $uname = empty($request->input('uname'))?'':$request->input('uname');
         $sex = empty($request->input('sex'))?0:$request->input('sex');
         if($sex == 0){
@@ -31,16 +29,18 @@ class UserController extends Controller
         $list = h_user::where('sex',$where,$sex)
                              ->where('uname','like',"%$uname%")
                              ->get();
+                           
         $tiao=count($list);
-         //dd($tiao);
+         
         $list = h_user::where('sex',$where,$sex)
                              ->where('uname','like',"%$uname%")
-                             ->paginate(5);                     
+                             ->paginate(5); 
+                                              
         $sou['uname'] = $uname;
         $sou['sex']  = $sex;
-        // dd($sou);
        
-        // return view('admin.user.index',['list'=>$list]);
+        
+        
         return view('admin.user.index',compact('list','sou','tiao'));
     }
 
@@ -64,9 +64,9 @@ class UserController extends Controller
     {
         
         $arr = $request->except('_token');
-        // dd($arr);
+        
         $file = $request->file('uface');
-        // dd($file);
+       
         $destinationPath = './user_pic';
         $uface = '';
         if ($request->hasFile('uface')) {
